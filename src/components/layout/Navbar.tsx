@@ -18,7 +18,7 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { isConnected, address, isAdmin, disconnectWallet } = useWallet();
+  const { isConnected, address, isAdmin, isPending, disconnectWallet } = useWallet();
   const { pathname } = useLocation();
 
   const navLinks = [
@@ -84,7 +84,7 @@ export function Navbar() {
                   </div>
                 ) : (
                   <Button
-                    loading={isModalOpen}
+                    loading={isModalOpen || isPending}
                     onClick={() => setIsModalOpen(true)}>
                     Connect Wallet
                   </Button>
