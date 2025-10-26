@@ -60,12 +60,10 @@ export function Button({
         ${className}  // ✅ Append user-defined className
       `}
     >
+      {icon && <span className="mr-2">{icon}</span>}
       {loading ?
-        (<Loader2 className='relative animate-spin' size={loaderSize}/>) :
-        (<>
-          {icon && <span className="mr-2">{icon}</span>}
-          {children}
-        </>)}
+        (<Loader2 className='relative animate-spin' size={loaderSize} />) :
+        <>{children}</>}
     </motion.button>
   );
 }
