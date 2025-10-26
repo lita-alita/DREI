@@ -22,5 +22,6 @@ export default defineConfig({
   define: {
     // Define environment variables for client-side
     'process.env.NEXT_PUBLIC_ENABLE_TESTNETS': JSON.stringify(process.env.NEXT_PUBLIC_ENABLE_TESTNETS || 'false'),
-  },
+    'process.env.VITE_REOWN_PROJECT_ID': JSON.stringify(process.env.VITE_REOWN_PROJECT_ID || '')
+  }
 })
