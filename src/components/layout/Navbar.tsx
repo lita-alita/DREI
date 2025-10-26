@@ -57,11 +57,10 @@ export function Navbar() {
                     <Link
                       key={link.path}
                       to={link.path}
-                      className={`${
-                        pathname === link.path
+                      className={`${pathname === link.path
                           ? 'bg-gray-700 text-white'
                           : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                      } px-3 py-2 rounded-md text-sm font-medium flex items-center`}
+                        } px-3 py-2 rounded-md text-sm font-medium flex items-center`}
                     >
                       <span className="mr-1">{link.icon}</span>
                       {link.name}
@@ -84,7 +83,9 @@ export function Navbar() {
                     </Button>
                   </div>
                 ) : (
-                  <Button onClick={() => setIsModalOpen(true)}>
+                  <Button
+                    loading={isModalOpen}
+                    onClick={() => setIsModalOpen(true)}>
                     Connect Wallet
                   </Button>
                 )}
@@ -116,11 +117,10 @@ export function Navbar() {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`${
-                    pathname === link.path
+                  className={`${pathname === link.path
                       ? 'bg-gray-700 text-white'
                       : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  } px-3 py-2 rounded-md text-base font-medium flex items-center`}
+                    } px-3 py-2 rounded-md text-base font-medium flex items-center`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="mr-2">{link.icon}</span>

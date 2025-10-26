@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Loader2 } from "lucide-react";
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -8,6 +9,7 @@ type ButtonProps = {
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
   disabled?: boolean;
+  loading?: boolean
   type?: 'button' | 'submit' | 'reset';
   icon?: React.ReactNode;
   className?: string; // ✅ Add support
@@ -20,6 +22,7 @@ export function Button({
   size = 'md',
   fullWidth = false,
   disabled = false,
+  loading = false,
   type = 'button',
   icon,
   className = '', // ✅ Add default value
@@ -37,15 +40,17 @@ export function Button({
     lg: 'px-6 py-3 text-base',
   };
   const widthStyle = fullWidth ? 'w-full' : '';
-  const disabledStyle = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
+  const isButtonDisabled = disabled || loading
+  const disabledStyle = isButtonDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
+  const loaderSize = size === "lg" ? 24 : size === "md" ? 20 : 16;
 
   return (
     <motion.button
       type={type}
       onClick={onClick}
-      disabled={disabled}
-      whileTap={{ scale: disabled ? 1 : 0.97 }}
-      whileHover={{ scale: disabled ? 1 : 1.03 }}
+      disabled={isButtonDisabled}
+      whileTap={{ scale: isButtonDisabled ? 1 : 0.97 }}
+      whileHover={{ scale: isButtonDisabled ? 1 : 1.03 }}
       className={`
         ${baseStyles}
         ${variantStyles[variant]}
@@ -55,8 +60,12 @@ export function Button({
         ${className}  // ✅ Append user-defined className
       `}
     >
-      {icon && <span className="mr-2">{icon}</span>}
-      {children}
+      {loading ?
+        (<Loader2 className='relative animate-spin' size={loaderSize}/>) :
+        (<>
+          {icon && <span className="mr-2">{icon}</span>}
+          {children}
+        </>)}
     </motion.button>
   );
 }
